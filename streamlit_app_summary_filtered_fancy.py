@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import nltk
+import nltk    
 from nltk import word_tokenize, pos_tag
 from wordcloud import WordCloud
 
@@ -20,7 +20,7 @@ st.set_page_config(
 st.markdown("""
     <style>
     body {
-        background-image: url('C:\\Users\\307164\\Desktop\\2023_CS_PA_NLP_Final\\cs_pa_nlp\\Streamlit_Application\\bg_image.jpg');
+        background-image: url('./bg_image.jpg');
         background-size: cover;
     }
     .custom-header {
@@ -275,6 +275,6 @@ class Intellibot:
 
 if __name__ == '__main__':
     # Load your data here
-    call_transcriptions_df = pd.read_csv(r"C:\Users\307164\Desktop\2023_CS_PA_NLP_Final\cs_pa_nlp\Streamlit_Application\final_output_for_streamlit.csv")
+    call_transcriptions_df = pd.read_csv(r"./final_output_for_streamlit.csv")
     bot = Intellibot(call_transcriptions_df)
     bot.run()
