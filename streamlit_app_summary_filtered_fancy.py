@@ -119,7 +119,9 @@ class Intellibot:
         # Custom layout
         fig.update_layout(
             showlegend=True,
-            legend=dict(title='Topics', x=0.8, y=0.5),
+            legend=dict(title='Topics', x=0.8, y=0.5), 
+    width=800,  # Set the width of the plot in pixels
+    height=800 
         )
 
         # Show the chart using Streamlit
