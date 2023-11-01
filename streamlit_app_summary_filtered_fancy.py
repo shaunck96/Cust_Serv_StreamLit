@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import plotly.graph_objects as go
-import nltk    
+import nltk
 from nltk import word_tokenize, pos_tag
 from wordcloud import WordCloud
 
@@ -93,9 +93,9 @@ class Intellibot:
         ]
 
         # Topic Distribution - Replaced with Plotly
-        st.subheader("Topic Distribution")
         topic_distribution = filtered_df['Primary_Estimated_Topic'].value_counts().reset_index()
         topic_distribution.columns = ['Topic', 'Count']
+        topic_distribution = topic_distribution.sort_values(by=['Count'],ascending=False).head(10)
         # Create a Plotly bar chart
         #fig = px.bar(topic_distribution, x='Topic', y='Count',
         #            labels={'x': 'Topic', 'y': 'Count'},
@@ -109,7 +109,7 @@ class Intellibot:
 
         # Create an interactive pie chart
         fig = px.pie(topic_distribution, values='Count', names='Topic', 
-                    title='Pie Chart of Topic Distribution', 
+                    title='Topic Distribution', 
                     hole=0.3, # Make it a donut chart (0 for a pie chart)
                     labels={'Topic': 'Topics'}, 
                     color_discrete_sequence=px.colors.qualitative.Set3) # Set color scheme
@@ -118,14 +118,12 @@ class Intellibot:
 
         # Custom layout
         fig.update_layout(
-            showlegend=True,
-            legend=dict(title='Topics', x=0.8, y=0.5), 
-    width=800,  # Set the width of the plot in pixels
-    height=800 
+            showlegend=False,
+            legend=dict(title='Topics', x=2, y=0.5)
         )
 
         # Show the chart using Streamlit
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
         #st.subheader("Word Cloud for Nouns in Topics")
         #topic_text = ' '.join(filtered_df['output_text'])
@@ -224,7 +222,7 @@ class Intellibot:
             num_summaries = st.selectbox("Select the number of summaries to display", [5, 10, 15], key="num_summaries_selectbox")
 
             # Get the most recent summaries, primary topics, and raw transcriptions
-            filtered_recent_data = filtered_recent_data.head(num_summaries)
+            filtered_recent_data = filtered_recent_data.sample(n=num_summaries, random_state=42)
 
             # Create a user-friendly visual representation of summaries and topics with raw transcriptions
             st.subheader("Summaries With Original Transcriptions")
