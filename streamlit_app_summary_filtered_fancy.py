@@ -275,6 +275,6 @@ class Intellibot:
 
 if __name__ == '__main__':
     # Load your data here
-    call_transcriptions_df = pd.read_csv(r"./final_output_for_streamlit.csv")
+    call_transcriptions_df = pd.read_csv(r"./final_output_for_streamlit_v2.csv")
     bot = Intellibot(call_transcriptions_df)
     bot.run()
